@@ -1,10 +1,10 @@
 import './App.css'
+import { Login } from './views/login'
 
 const App = () => {
   return (
     <div className="App">
-      <header className="App-header">
-      </header>
+      <Login></Login>
     </div>
   )
 }
