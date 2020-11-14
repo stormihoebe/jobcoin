@@ -18,6 +18,7 @@ export const Card = ({ headerText, children }) => {
 const CardStyle = styled.div`
     border: 1px solid ${primary};
     border-radius: 5px;
+    margin-bottom: 20px;
     .header {
       font-size: medium;
       text-align: center;
@@ -26,7 +27,7 @@ const CardStyle = styled.div`
       display:flex;
       justify-content: center;
       align-items: center;
-      padding: 1em 8em;
+      padding: 1em;
     }
     .body {
       justify-content: center;
