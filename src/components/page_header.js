@@ -1,5 +1,5 @@
 import logo from "../assets/logo.svg"
-import userIcon from "../assets/logo.svg"
+import userIcon from "../assets/user.svg"
 import styled from "styled-components"
 import { colors } from "../colors"
 const { primaryText, primary, accent } = colors

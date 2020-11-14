@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import { Button } from "../styled_components/button"
+import { Form } from "../styled_components/form"
 import { colors } from "../colors"
 import { strings } from "../strings"
 import logo from "../assets/logo.svg"
@@ -27,11 +28,11 @@ export const Login = ({ setCurrentAddress }) => {
           <img src={logo}></img>
         </div>
         <Card headerText={welcomeText}>
-          <form onSubmit={handleSubmit}>
+          <Form onSubmit={handleSubmit}>
             <label>Jobcoin Address</label>
-            <input type="text" value={jobcoinAddress} onChange={e => setJobcoinAddress(e.target.value)}></input>
+            <input type="text" autoFocus={true} value={jobcoinAddress} onChange={e => setJobcoinAddress(e.target.value)}></input>
             <Button>Sign In</Button>
-          </form>
+          </Form>
         </Card>
       </div>
     </LoginView>
@@ -56,22 +57,6 @@ const LoginView = styled.div`
     margin-bottom: 2em;
     img {
       width: 100px;
-    }
-  }
-  form {
-    display: flex;
-    flex-direction: column;
-    label {
-      width: 100%;
-      display: block;
-      font-size: small;
-    }
-    input {
-      height: 30px;
-      border: 1px solid ${primary};
-      border-radius: 3px;
-      margin-bottom: 18px;
-      margin-top: 5px;
     }
   }
 `
