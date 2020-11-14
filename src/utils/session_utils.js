@@ -3,7 +3,7 @@ export const handleLogin = (username) => {
 }
 
 export const handleLogout = () => {
-  localStorage.setItem('username', null);
+  localStorage.removeItem('username');
 }
 
 export const isLoggedIn = () => {
@@ -11,5 +11,5 @@ export const isLoggedIn = () => {
 }
 
 export const getCurrentAddress = () => {
-  return localStorage.getItem('username') != null
+  return localStorage.getItem('username')
 }
