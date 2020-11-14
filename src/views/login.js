@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import { Button } from "../styled_components/button"
 import { colors } from "../colors"
-const { primary } = colors
+const { primary, primaryText } = colors
 
 export const Login = () => {
   return (
@@ -33,6 +33,8 @@ const LoginView = styled.div`
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  color: ${primaryText};
+  font-weight: bolder;
   .wrapper {
     width: 40%;
     min-width: 400px;
@@ -41,8 +43,6 @@ const LoginView = styled.div`
     border: 1px solid ${primary};
     border-radius: 5px;
     .header {
-      color: ${primary};
-      font-weight: bolder;
       font-size: medium;
       text-align: center;
       height: 60px;
@@ -50,6 +50,7 @@ const LoginView = styled.div`
       display:flex;
       justify-content: center;
       align-items: center;
+      padding: 1em 8em;
     }
     .body {
       justify-content: center;
@@ -59,9 +60,10 @@ const LoginView = styled.div`
     form {
       display: flex;
       flex-direction: column;
-      label: {
+      label {
         width: 100%;
         display: block;
+        font-size: small;
       }
       input {
         height: 30px;
