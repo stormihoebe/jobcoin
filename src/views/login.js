@@ -5,10 +5,21 @@ import { strings } from "../strings"
 import logo from "../assets/logo.svg"
 
 import { Card } from "../components/card"
+import { useState } from "react"
+import { handleLogin } from "../utils/session_utils"
 const { primary, primaryText } = colors
 const { welcomeText } = strings.login
 
-export const Login = () => {
+export const Login = ({ setCurrentAddress }) => {
+  const [jobcoinAddress, setJobcoinAddress] = useState('')
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    if (jobcoinAddress == "") return
+    // local storage for persistance 
+    handleLogin(jobcoinAddress)
+    setCurrentAddress(jobcoinAddress)
+  }
   return (
     <LoginView>
       <div className="wrapper">
@@ -16,9 +27,9 @@ export const Login = () => {
           <img src={logo}></img>
         </div>
         <Card headerText={welcomeText}>
-          <form>
+          <form onSubmit={handleSubmit}>
             <label>Jobcoin Address</label>
-            <input></input>
+            <input type="text" value={jobcoinAddress} onChange={e => setJobcoinAddress(e.target.value)}></input>
             <Button>Sign In</Button>
           </form>
         </Card>
