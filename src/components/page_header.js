@@ -8,11 +8,11 @@ export const PageHeader = ({ currentAddress, logout }) => {
   return (
     <PageHeaderStyles>
       <div className="branding">
-        <img className="logo" src={logo}></img>
+        <img className="logo" src={logo} alt="logo"></img>
         <p> Jobcoin Sender</p>
       </div>
       <div className="user-menu">
-        <img className="icon" src={userIcon}></img>
+        <img className="icon" src={userIcon} alt="user icon"></img>
         <p>Signed in ({currentAddress})</p>
         <p className="accent clickable" onClick={() => logout()}>Sign Out</p>
       </div>

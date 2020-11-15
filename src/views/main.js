@@ -7,6 +7,7 @@ import { PageHeader } from "../components/page_header"
 import { Button } from "../styled_components/button"
 import { Form } from "../styled_components/form"
 import { getBalance, getHistory, postJobcoinTransaction } from "../utils/client_utils"
+import { HistoryGraph } from "../components/chart"
 const { primaryText, primary } = colors
 
 const SendForm = ({ sendCoin }) => {
@@ -15,7 +16,7 @@ const SendForm = ({ sendCoin }) => {
 
   const handleSend = async (e) => {
     e.preventDefault()
-    if (destinationAddress == "" || amount == 0) return
+    if (destinationAddress === "" || amount === 0) return
     await sendCoin(destinationAddress, amount)
     // reset form
     setAmount(0)
@@ -33,12 +34,17 @@ const SendForm = ({ sendCoin }) => {
 }
 
 export const Main = ({ currentAddress, logout }) => {
-  const [err, setError] = useState(null)
   const [balance, setBalance] = useState(0)
   const [transactionHistory, setTransactionHistory] = useState([])
 
   const sendCoin = async (toAddress, amount) => {
-    const resp = await postJobcoinTransaction(toAddress, currentAddress, amount)
+    // Post transaction
+    await postJobcoinTransaction(toAddress, currentAddress, amount)
+    // fetch new balance and history
+    const newBalance = await getBalance(currentAddress)
+    setBalance(newBalance)
+    const transactions = await getHistory()
+    setTransactionHistory(transactions)
   }
 
   useEffect(async () => {
@@ -60,7 +66,10 @@ export const Main = ({ currentAddress, logout }) => {
             <SendForm sendCoin={sendCoin}></SendForm>
           </Card>
         </div>
-        <div className="graph-viewer">Jobcoin History Graph</div>
+        <div className="graph-viewer">
+          Jobcoin History Graph
+          {transactionHistory.length && <HistoryGraph transactionHistory={transactionHistory}></HistoryGraph>}
+        </div>
       </div>
     </MainView>
   )

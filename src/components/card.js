@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { colors } from "../colors"
-const { primary, primaryText } = colors
+const { primary } = colors
 
 export const Card = ({ headerText, children }) => {
   return (

@@ -2,19 +2,13 @@ import axios from 'axios'
 const url = 'http://jobcoin.gemini.com/errant-clear/api'
 
 export const getBalance = async (address) => {
-  // const { data } = await axios(`${url}/addresses/${address}`)
-  // return parseInt(data.balance)
-  return 50
+  const { data } = await axios(`${url}/addresses/${address}`)
+  return parseFloat(data.balance)
 }
 
-
 export const getHistory = async () => {
-  // const { data } = await axios(`${url}/transactions`)
-  // return data
-  // var str = JSON.stringify(data, null, 2); // spacing level = 2
-  // console.log(str)
-
-  return []
+  const { data } = await axios(`${url}/transactions`)
+  return data
 }
 
 export const postJobcoinTransaction = async (toAddress, fromAddress, amount) => {

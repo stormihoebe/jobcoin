@@ -8,7 +8,7 @@ import logo from "../assets/logo.svg"
 import { Card } from "../components/card"
 import { useState } from "react"
 import { handleLogin } from "../utils/session_utils"
-const { primary, primaryText } = colors
+const { primaryText } = colors
 const { welcomeText } = strings.login
 
 export const Login = ({ setCurrentAddress }) => {
@@ -16,7 +16,7 @@ export const Login = ({ setCurrentAddress }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (jobcoinAddress == "") return
+    if (jobcoinAddress === "") return
     // local storage for persistance 
     handleLogin(jobcoinAddress)
     setCurrentAddress(jobcoinAddress)
@@ -25,7 +25,7 @@ export const Login = ({ setCurrentAddress }) => {
     <LoginView>
       <div className="wrapper">
         <div className="logo">
-          <img src={logo}></img>
+          <img src={logo} alt="logo"></img>
         </div>
         <Card headerText={welcomeText}>
           <Form onSubmit={handleSubmit}>
