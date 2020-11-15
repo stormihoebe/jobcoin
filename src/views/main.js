@@ -1,21 +1,25 @@
 import styled from "styled-components"
-import { useState } from "react"
+import { useState, useEffect } from "react"
+
 import { colors } from "../colors"
 import { Card } from "../components/card"
 import { PageHeader } from "../components/page_header"
 import { Button } from "../styled_components/button"
 import { Form } from "../styled_components/form"
+import { getBalance, getHistory, postJobcoinTransaction } from "../utils/client_utils"
 const { primaryText, primary } = colors
-const balance = 1234
 
-const SendForm = () => {
-  const [destinationAddress, setDestinationAddress] = useState('')
+const SendForm = ({ sendCoin }) => {
+  const [destinationAddress, setDestinationAddress] = useState("")
   const [amount, setAmount] = useState(0)
 
-  const handleSend = (e) => {
+  const handleSend = async (e) => {
     e.preventDefault()
     if (destinationAddress == "" || amount == 0) return
-    //  send amount
+    await sendCoin(destinationAddress, amount)
+    // reset form
+    setAmount(0)
+    setDestinationAddress("")
   }
   return (
     <Form onSubmit={handleSend}>
@@ -29,6 +33,21 @@ const SendForm = () => {
 }
 
 export const Main = ({ currentAddress, logout }) => {
+  const [err, setError] = useState(null)
+  const [balance, setBalance] = useState(0)
+  const [transactionHistory, setTransactionHistory] = useState([])
+
+  const sendCoin = async (toAddress, amount) => {
+    const resp = await postJobcoinTransaction(toAddress, currentAddress, amount)
+  }
+
+  useEffect(async () => {
+    const newBalance = await getBalance(currentAddress)
+    setBalance(newBalance)
+    const transactions = await getHistory()
+    setTransactionHistory(transactions)
+  }, [])
+
   return (
     <MainView>
       <PageHeader currentAddress={currentAddress} logout={logout} />
@@ -38,7 +57,7 @@ export const Main = ({ currentAddress, logout }) => {
             <p className="balance">{balance}</p>
           </Card>
           <Card headerText="Send Jobcoin">
-            <SendForm></SendForm>
+            <SendForm sendCoin={sendCoin}></SendForm>
           </Card>
         </div>
         <div className="graph-viewer">Jobcoin History Graph</div>
